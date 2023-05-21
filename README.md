@@ -7,13 +7,15 @@
 - 使用方法(单进程情况下使用FlowControl 类，多进程情况下使用ProcessFlowControl类)
 
   ```Python
-  #encoding=utf-8
+  # encoding=utf-8
   import os
   import threading
   
   from datetime import datetime
-  from flow_control.controller import FlowControl
-  from flow_control.controller import ProcessFlowControl
+  from flow_control.controller import FlowController
+  from flow_control.controller import ProcessFlowController
+  from flow_control.controller import AverageFlowControl
+  from flow_control.controller import AverageProcessFlowControl
   from threading import Thread
 
   
@@ -23,14 +25,11 @@
           if flowcontrol.get():
               print("{}--{}--{}".format(os.getpid(), threading.currentThread().ident, datetime.now()))
   
-  flow_control = FlowControl(num=1, interval=1)
+  flow_control = AverageFlowControl(num=0.5, interval=1)
   Thread(target=work, args=(flow_control,)).start()
   work(flow_control)
   ```
 
-  
-
-  
 
   - 创建一个FlowControl (单进程情况下)或者 ProcessFlowControl(多进程情况下) 对象，参数为(num=访问次数,interval=时间间隔)，
   - num的类型应该为int类型，interval应该为int或者float类型

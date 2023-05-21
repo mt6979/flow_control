@@ -1,3 +1,5 @@
 #encoding=utf-8
-from .controller import FlowControl
-from .controller import ProcessFlowControl
+from .controller import FlowController
+from .controller import ProcessFlowController
+from .controller import AverageFlowController
+from .controller import AverageProcessFlowController
